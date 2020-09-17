@@ -5,9 +5,17 @@
             In ${language.name}, I am <strong>${language.rank_text}</strong>.
             <br>
                 <select name='${language.name}' placeholder = 'Update your ranking'>
-                    <option value="" disabled selected hidden>Update your ${language.name} rank?</option>
-                    ${data_rank.map(rank => { return `<option value="${rank.rank_num}" name="rank_id">${rank.rank_text}</option>`}).join('')}
-                </select></label><br>`}).join('')}
+                    <option value="" disabled selected hidden>
+                        Update your ${language.name} rank?
+                    </option>
+                    ${data_rank.map(rank => { return `
+                        <option value="${rank.rank_num}" name="rank_id">
+                            ${rank.rank_text}
+                        </option>
+                    `}).join('')}
+                </select>
+            </label>
+            <br>`}).join('')}
     <br>
     <button type="submit">Submit your rankings to the database</button>
     </form>

@@ -4,11 +4,10 @@ const express = require('express'),
     router = express.Router(),
     languages = require('../models/languages'),
     rankings = require('../models/rankings')
-
-router.get('/', async (req, res) =>{
+const renderPage = async res => {
     const langData = await languages.getAll();
     const rankData = await rankings.getAll();
-    res.render("template", {
+    return res.render("template", {
         locals: {
             title: "Welcome",
             data_lang: langData,
@@ -18,12 +17,17 @@ router.get('/', async (req, res) =>{
             partial: "partial-index"
         }
     });
+}
+
+router.get('/', async (req, res) =>{
+    renderPage(res);
 });
 router.post('/', async (req, res) =>{
     for (let key in req.body){
         const dbResponse = await languages.updateStatus(req.body[key], key)
     }
-    res.redirect('/');
+    //res.redirect('/');
+    renderPage(res);
 });
 
 module.exports = router;

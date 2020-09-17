@@ -9,7 +9,7 @@ class LanguagesList {
     }
     static async getAll () {
         try {
-            const response = await db.any(`SELECT * FROM languages INNER JOIN rankings ON rankings.rank_id = languages.my_rank;`);
+            const response = await db.any(`SELECT * FROM languages INNER JOIN rankings ON rankings.rank_id = languages.my_rank ORDER BY languages.id;`);
             return response;
         }catch (error){
             return error.message;
